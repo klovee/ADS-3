@@ -2,10 +2,8 @@
 #include <string>
 #include "tstack.h"
 
-int priority(char prior)
-{
-    switch (prior)
-    {
+int priority(char prior) {
+    switch (prior) {
     case '(':return 0;
     case ')':return 1;
     case '+':return 2;
@@ -17,11 +15,11 @@ int priority(char prior)
 }
 
 int cal(int num1, int num2, char op){
-  if (op == '+') 
+  if (op == '+')
     return num1 + num2;
-  else if (op == '-') 
+  else if (op == '-')
     return num1 - num2;
-  else if (op == '*') 
+  else if (op == '*')
     return num1 * num2;
   else if (op = '/')
     return num1 / num2;
@@ -41,7 +39,8 @@ std::string infx2pstfx(std::string inf) {
           top = ch;
         infWrite.push(ch);
       }
-      else if (ch == ')') {
+      else if (ch == ')') 
+      {
         while (infWrite.get() != '(') {
           pst.push_back(infWrite.get());
           pst.push_back(' ');
@@ -51,7 +50,8 @@ std::string infx2pstfx(std::string inf) {
         if (infWrite.isEmpty())
           top = 0;
       }
-      else {
+      else
+      {
         while (!infWrite.isEmpty() &&
                priority(infWrite.get()) >= prior) {
           pst.push_back(infWrite.get());
@@ -63,7 +63,8 @@ std::string infx2pstfx(std::string inf) {
         infWrite.push(inf[i]);
       }
     }
-    else {
+    else
+    {
       pst.push_back(ch);
       pst.push_back(' ');
     }
@@ -79,8 +80,7 @@ std::string infx2pstfx(std::string inf) {
 
 int eval(std::string pst) {
   TStack <int> pst;
-  for (int i = 0; i < pst.size(); i++)
-  {
+  for (int i = 0; i < pst.size(); i++) {
     char ch = pst[i];
     int prior = priority(ch);
     if (prior == -1)
